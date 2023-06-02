@@ -39,4 +39,71 @@ const siteContent = { // DO NOT CHANGE THIS OBJECT
   },
 };
 
-console.log('project wired!')
+function initializeNav(){
+  const navButtons = document.querySelectorAll('nav a')
+  const navText = siteContent.nav
+
+  for(let i=0; i<navButtons.length; i++){
+    const navTextKey = "nav-item-"+(parseInt(i)+1);
+    navButtons[i].textContent = navText[navTextKey]
+    navButtons[i].classList.add('italic')
+  }
+}
+
+function initializeCTA(){
+  const ctaContent = siteContent.cta;
+  const ctaH1 = document.querySelector(".cta-text h1")
+  const ctaButton = document.querySelector('.cta-text button')
+
+  console.log({ctaContent,ctaH1,ctaButton})
+  ctaH1.textContent = ctaContent.h1;
+  ctaButton.textContent = ctaContent.button;
+}
+
+function initializeMainContent(){
+  const mainContent = siteContent['main-content']
+  const textContentElms = document.querySelectorAll('.text-content')
+  const order = ['features','about','services','product','vision']
+
+  for(let i = 0; i<order.length;i++){
+    const sectionTitle = mainContent[order[i]+'-h4']
+    const sectionContent = mainContent[order[i]+'-content']
+
+    const h4 = textContentElms[i].querySelector('h4')
+    const content = textContentElms[i].querySelector('p')
+
+    h4.textContent = sectionTitle;
+    content.textContent = sectionContent;
+  }
+}
+
+function initializeContact(){
+  const elms = document.querySelectorAll('.contact *')
+  const contactContent = siteContent.contact;
+  const order = ['contact-h4','address','phone','email']
+
+  for(let i = 0; i<elms.length;i++){
+    elms[i].textContent = contactContent[order[i]]
+  }
+}
+
+function initializeFooter(){
+  const footerLink = document.querySelector('footer a')
+  footerLink.textContent = siteContent.footer.copyright
+  footerLink.classList.add('bold')
+}
+
+function initializeImages(){
+  const images = siteContent.images
+  document.getElementById('logo-img').setAttribute('src',images["logo-img"])
+  document.getElementById('cta-img').setAttribute('src',images["cta-img"])
+  document.getElementById('middle-img').setAttribute('src',images["accent-img"])
+
+}
+
+initializeNav()
+initializeCTA()
+initializeMainContent()
+initializeContact()
+initializeFooter()
+initializeImages()
